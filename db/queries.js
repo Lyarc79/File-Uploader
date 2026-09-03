@@ -16,6 +16,16 @@ async function getUserById(id) {
   return user;
 }
 
+async function createUser(username, email, hashedPassword) {
+  const user = await prisma.user.create({
+    data: {
+      username: username,
+      email: email,
+      password: hashedPassword,
+    },
+  });
+}
+
 module.exports = {
   getUserByIdentifier,
   getUserById,
