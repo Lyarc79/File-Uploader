@@ -1,0 +1,13 @@
+<header class="main-header">
+  <div class="home">
+    <a href="/" class="home-btn">File Uploader</a>
+  </div>
+  <div class="header-right-links">
+    <% if (locals.user) { %>
+      <a href="/logout" class="header-link logout-btn">Log out</a>
+    <% } else { %>
+      <a href="/login" class="header-link login-btn">Log in</a>
+      <a href="/signup" class="header-link signup-btn"> Sign up</a>
+    <% } %>
+  </div>
+</header>
