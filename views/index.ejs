@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Uploader</title>
+  </head>
+  <body>
+    <%- include("partials/header") %>
+    <main class="main-container">
+      <button onclick="openDialog()">Upload file</button>
+      <h1>Welcome to your Dashboard</h1>
+      <% if(user) { %>
+        <p>Logged in as: <strong><%= user.username %></strong></p>
+        <% } %>
+        <dialog id="uploadFileDialog">
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="uploadedFile">
+                <button type="button" onclick="closeDialog()">Close</button>
+                <button type="submit">Upload</button>
+            </form>
+        </dialog>
+    </main>
+  </body>
+  <script>
+    const dialog = document.getElementById("uploadFileDialog");
+    function openDialog(){
+        dialog.showModal()
+    }
+    function closeDialog(){
+        dialog.close();
+    }
+  </script>
+</html>
