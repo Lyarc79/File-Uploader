@@ -12,7 +12,7 @@ async function getLoginForm(req, res) {
 }
 
 async function getSignupForm(req, res) {
-  return res.render("signup");
+  return res.render("signup", { formData: {} });
 }
 
 async function postSignupForm(req, res) {
@@ -29,8 +29,30 @@ async function postSignupForm(req, res) {
   res.redirect("/login");
 }
 
+async function getIndex(req, res) {
+  res.render("index", { user: req.user });
+}
+
+async function logoutUser(req, res, next) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/login");
+  });
+}
+
+async function postUploadFileForm(req, res) {
+  const { filename, size, path } = req.file;
+  console.log("Uploaded file details:", { filename, size, path });
+  res.redirect("/");
+}
+
 module.exports = {
   getLoginForm,
   getSignupForm,
   postSignupForm,
+  getIndex,
+  logoutUser,
+  postUploadFileForm,
 };
