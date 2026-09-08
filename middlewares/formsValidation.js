@@ -1,7 +1,16 @@
 const { body } = require("express-validator");
 
 const validateSignup = [
-  // Username and email pending to validate
+  body("username")
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage("Username must be longer than 3 characters."),
+
+  body("email")
+    .trim()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage("Enter a valid email address (e.g. username@mail.com)."),
 
   body("password")
     .trim()
