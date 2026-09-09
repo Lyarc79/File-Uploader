@@ -3,6 +3,17 @@ const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 
+// Helper funcs
+async function renderIndexInfo(req, res, errors = null) {
+  const folders = await db.getFolders(req.user.id);
+  return res.render("index", {
+    user: req.user,
+    folders,
+    errors: errors,
+  });
+}
+
+// Normal handlers
 async function getLoginForm(req, res) {
   const messages = req.session.messages || [];
   const errorMessage =
@@ -30,7 +41,7 @@ async function postSignupForm(req, res) {
 }
 
 async function getIndex(req, res) {
-  res.render("index", { user: req.user });
+  return renderIndexInfo(req, res);
 }
 
 async function logoutUser(req, res, next) {
@@ -48,6 +59,25 @@ async function postUploadFileForm(req, res) {
   res.redirect("/");
 }
 
+async function postCreateFolder(req, res) {
+  const errors = validationResult(req).array();
+  if (!errors.isEmpty()) {
+    return renderIndexInfo(req, res, errors);
+  }
+  await db.createFolder(req.body.name, req.user.id);
+  res.redirect("/");
+}
+
+async function postUpdateFolder(req, res) {
+  await db.updateFolderName(req.body.name, req.params.id);
+  res.redirect("/");
+}
+
+async function postDeleteFolder(req, res) {
+  await db.deleteFolder(req.params.id);
+  res.redirect("/");
+}
+
 module.exports = {
   getLoginForm,
   getSignupForm,
@@ -55,4 +85,7 @@ module.exports = {
   getIndex,
   logoutUser,
   postUploadFileForm,
+  postCreateFolder,
+  postUpdateFolder,
+  postDeleteFolder,
 };
