@@ -18,6 +18,7 @@ model User {
   username String   @unique
   password String
   folders  Folder[]
+  file     File[]
 }
 
 model Session {
@@ -29,8 +30,9 @@ model Session {
 
 model Folder {
   id     Int    @id @default(autoincrement())
-  user   User?  @relation(fields: [userId], references: [id])
-  userId Int?
+  name   String
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int
   files  File[]
 }
 
@@ -42,4 +44,6 @@ model File {
   createdAt DateTime @default(now())
   folder    Folder?  @relation(fields: [folderId], references: [id])
   folderId  Int?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
