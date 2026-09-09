@@ -20,6 +20,11 @@ indexRouter.post(
 indexRouter.get("/signup", isGuest, indexController.getSignupForm);
 indexRouter.post("/signup", validateSignup, indexController.postSignupForm);
 indexRouter.get("/logout", indexController.logoutUser);
+
+indexRouter.post("/folders", indexController.postCreateFolder);
+indexRouter.post("/folders/:id/update", indexController.postUpdateFolder);
+indexRouter.post("/folders/:id/delete", indexController.postDeleteFolder);
+
 indexRouter.post(
   "/upload",
   upload.single("uploadedFile"),
