@@ -26,7 +26,41 @@ async function createUser(username, email, hashedPassword) {
   });
 }
 
+async function createFolder(name, userId) {
+  const folder = await prisma.folder.create({
+    data: {
+      name: name,
+      userId: userId,
+    },
+  });
+
+  async function getFolders(userId) {
+    const folders = await prisma.folder.findMany({
+      where: { userId: userId },
+    });
+  }
+  return folders;
+}
+
+async function updateFolderName(name, id) {
+  const folder = await prisma.folder.update({
+    where: { id: id },
+    data: { name: name },
+  });
+}
+
+async function deleteFolder(id) {
+  const folder = await prisma.folder.delete({
+    where: { id: id },
+  });
+}
+
 module.exports = {
   getUserByIdentifier,
   getUserById,
+  createUser,
+  createFolder,
+  getFolders,
+  updateFolderName,
+  deleteFolder,
 };
