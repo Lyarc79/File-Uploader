@@ -8,27 +8,48 @@
   <body>
     <%- include("partials/header") %>
     <main class="main-container">
-      <button onclick="openDialog()">Upload file</button>
       <h1>Welcome to your Dashboard</h1>
       <% if(user) { %>
         <p>Logged in as: <strong><%= user.username %></strong></p>
         <% } %>
+
+        <button onclick="openUploadFileDialog()">Upload file</button>
         <dialog id="uploadFileDialog">
             <form action="/upload" method="POST" enctype="multipart/form-data">
                 <input type="file" name="uploadedFile">
-                <button type="button" onclick="closeDialog()">Close</button>
-                <button type="submit">Upload</button>
+                <button type="button" onclick="closeUploadFileDialog()">Close</button>
+                <button type="submit">Upload File</button>
             </form>
         </dialog>
+
+        <button onclick="openNewFolderDialog()">New Folder</button>
+        <dialog id="newFolderDialog">
+          <form id="newFolderForm" action="/folders" method="POST">
+            <input type="text" name="name" id="newFolderInput" required>
+            <button type="button" onclick="closeNewFolderDialog()">Cancel</button>
+            <button type="submit">Create Folder</button>
+          </form>
+        </dialog>
+
+        <dialog id="editFolderDialog">
+          <form id="editFolderForm" method="POST">
+            <input type="text" name="name" id="editFolderInput" required>
+            <button type="button" onclick="closeEditFolderDialog()">Cancel</button>
+            <button type="submit">Update</button>
+          </form>
+        </dialog>
+        <ul>
+          <% folders.forEach(folder => { %>
+            <li class="folder-item">
+              <span><%= folder.name %></span>
+              <button type="button" onclick="openEditFolderDialog('<%= folder.id %>', '<%= folder.name %>')">Edit</button>
+              <form action="/folders/<%= folder.id %>/delete" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+            </li>
+         <% }); %>
+        </ul>
     </main>
   </body>
-  <script>
-    const dialog = document.getElementById("uploadFileDialog");
-    function openDialog(){
-        dialog.showModal()
-    }
-    function closeDialog(){
-        dialog.close();
-    }
-  </script>
+  <script src="/js/folderDialogs.js" defer></script>
 </html>
