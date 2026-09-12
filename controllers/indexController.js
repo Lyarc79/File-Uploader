@@ -60,9 +60,9 @@ async function postUploadFileForm(req, res) {
 }
 
 async function postCreateFolder(req, res) {
-  const errors = validationResult(req).array();
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return renderIndexInfo(req, res, errors);
+    return renderIndexInfo(req, res, errors.array());
   }
   await db.createFolder(req.body.name, req.user.id);
   res.redirect("/");
