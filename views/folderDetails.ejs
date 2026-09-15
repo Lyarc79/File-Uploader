@@ -9,11 +9,14 @@
     <%- include("partials/header") %>
     <%- include("partials/sidebar") %>
     <main class="main-container">
-      <h1>Welcome to your Dashboard</h1>
-      <% if(user) { %>
-        <p>Logged in as: <strong><%= user.username %></strong></p>
-        <% } %>
-
+        <p><%= folder.name %></p>
+        <% folder.files.forEach((file)=>{ %>
+            <li>
+                <span><%= file.name %></span>
+                <span><%= file.size %></span>
+                <span><%= file.createdAt %></span>
+            </li>
+        <% }) %>
     </main>
   </body>
 </html>
