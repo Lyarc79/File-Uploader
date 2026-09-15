@@ -55,6 +55,14 @@ async function deleteFolder(id) {
   });
 }
 
+async function getFolderById(id) {
+  const folder = await prisma.folder.findUnique({
+    where: { id: Number(id) },
+    include: { files: true },
+  });
+  return folder;
+}
+
 module.exports = {
   getUserByIdentifier,
   getUserById,
@@ -63,4 +71,5 @@ module.exports = {
   getFolders,
   updateFolderName,
   deleteFolder,
+  getFolderById,
 };
