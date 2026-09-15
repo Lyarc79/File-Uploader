@@ -10,6 +10,7 @@ async function renderIndexInfo(req, res, errors = null) {
     user: req.user,
     folders,
     errors: errors,
+    uploadAction: "/upload",
   });
 }
 
@@ -54,7 +55,12 @@ async function logoutUser(req, res, next) {
 }
 
 async function postUploadFileForm(req, res) {
+  const folderId = req.params.id;
   const { filename, size, path } = req.file;
+  if (folderId) {
+    console.log("Uploaded file details:", { folderId, filename, size, path });
+    return res.redirect(`/folders/${folderId}`);
+  }
   console.log("Uploaded file details:", { filename, size, path });
   res.redirect("/");
 }
@@ -78,6 +84,16 @@ async function postDeleteFolder(req, res) {
   res.redirect("/");
 }
 
+async function getFolderDetails(req, res) {
+  const folder = await db.getFolderById(req.params.id);
+  const folders = await db.getFolders(req.user.id);
+  res.render("folderDetails", {
+    folder,
+    folders,
+    uploadAction: `/folders/${folder.id}/upload`,
+  });
+}
+
 module.exports = {
   getLoginForm,
   getSignupForm,
@@ -88,4 +104,5 @@ module.exports = {
   postCreateFolder,
   postUpdateFolder,
   postDeleteFolder,
+  getFolderDetails,
 };
