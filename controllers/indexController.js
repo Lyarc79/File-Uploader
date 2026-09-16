@@ -2,13 +2,16 @@ const db = require("../db/queries");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+const supabase = require("../lib/supabase");
 
 // Helper funcs
 async function renderIndexInfo(req, res, errors = null) {
   const folders = await db.getFolders(req.user.id);
+  const files = await db.getRootFiles(req.user.id);
   return res.render("index", {
     user: req.user,
     folders,
+    files,
     errors: errors,
     uploadAction: "/upload",
   });
@@ -55,13 +58,26 @@ async function logoutUser(req, res, next) {
 }
 
 async function postUploadFileForm(req, res) {
-  const folderId = req.params.id;
-  const { filename, size, path } = req.file;
+  if (!req.file) {
+    return res.status(400).send("No file uploaded or field name missmatch.");
+  }
+  const folderId = req.params.id ? parseInt(req.params.id) : null;
+  const { originalname, buffer, size, mimetype } = req.file;
+  const filePath = folderId ? `${folderId}/${originalname}` : originalname;
+
+  const { data, error } = await supabase.storage
+    .from("uploads")
+    .upload(filePath, buffer, { contentType: mimetype, upsert: true });
+
+  if (error) {
+    console.error("Supabase upload error:", error);
+    return res.status(500).send("File upload failed.");
+  } else {
+    await db.uploadFile(filePath, originalname, size, folderId, req.user.id);
+  }
   if (folderId) {
-    console.log("Uploaded file details:", { folderId, filename, size, path });
     return res.redirect(`/folders/${folderId}`);
   }
-  console.log("Uploaded file details:", { filename, size, path });
   res.redirect("/");
 }
 
