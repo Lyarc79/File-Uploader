@@ -63,6 +63,27 @@ async function getFolderById(id) {
   return folder;
 }
 
+async function uploadFile(filePath, originalname, size, folderId, userId) {
+  const file = await prisma.file.create({
+    data: {
+      name: originalname,
+      path: filePath,
+      size: size,
+      folderId: folderId || null,
+      userId: userId,
+    },
+  });
+}
+
+async function getRootFiles(userId) {
+  return await prisma.file.findMany({
+    where: {
+      userId: userId,
+      folderId: null,
+    },
+  });
+}
+
 module.exports = {
   getUserByIdentifier,
   getUserById,
@@ -72,4 +93,6 @@ module.exports = {
   updateFolderName,
   deleteFolder,
   getFolderById,
+  uploadFile,
+  getRootFiles,
 };
