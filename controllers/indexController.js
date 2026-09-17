@@ -110,6 +110,28 @@ async function getFolderDetails(req, res) {
   });
 }
 
+async function postDeleteFile(req, res) {
+  const deletedFile = await db.deleteFile(req.params.id);
+  if (deletedFile.folderId) {
+    return res.redirect(`/folders/${deletedFile.folderId}`);
+  }
+  res.redirect("/");
+}
+
+async function downloadFile(req, res) {
+  const file = await db.getFileById(req.params.id);
+  const { data, error } = await supabase.storage
+    .from("uploads")
+    .download(file.path);
+  if (error) {
+    console.error("Supabase download error:", error);
+    return res.status(500).send("File download failed.");
+  }
+  const buffer = Buffer.from(await data.arrayBuffer());
+  res.setHeader("Content-Disposition", `attachment; filename="${file.name}`);
+  res.send(buffer);
+}
+
 module.exports = {
   getLoginForm,
   getSignupForm,
@@ -121,4 +143,6 @@ module.exports = {
   postUpdateFolder,
   postDeleteFolder,
   getFolderDetails,
+  postDeleteFile,
+  downloadFile,
 };
