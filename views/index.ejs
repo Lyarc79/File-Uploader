@@ -13,7 +13,23 @@
       <% if(user) { %>
         <p>Logged in as: <strong><%= user.username %></strong></p>
         <% } %>
-
+        <div>
+          <% files.forEach((file) => { %>
+            <div class="file-item">
+              <div class="file-specs">
+                <span><%= file.name %></span>
+                <span><%= file.size %></span>
+                <span><%= file.createdAt %></span>
+              </div>
+              <div class="file-utility">
+                <form action="/files/<%= file.id %>/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this file?');">
+                <button type="submit">Delete</button>
+                <a href="/files/<%= file.id %>/download">Download</a>
+              </form>
+              </div>
+            </div>
+          <% }) %>
+        </div>
     </main>
   </body>
 </html>
