@@ -84,6 +84,18 @@ async function getRootFiles(userId) {
   });
 }
 
+async function deleteFile(id) {
+  return await prisma.file.delete({
+    where: { id: Number(id) },
+  });
+}
+
+async function getFileById(id) {
+  return await prisma.file.findUnique({
+    where: { id: Number(id) },
+  });
+}
+
 module.exports = {
   getUserByIdentifier,
   getUserById,
@@ -95,4 +107,6 @@ module.exports = {
   getFolderById,
   uploadFile,
   getRootFiles,
+  deleteFile,
+  getFileById,
 };
