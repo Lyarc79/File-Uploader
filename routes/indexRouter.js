@@ -25,16 +25,18 @@ indexRouter.post("/folders", indexController.postCreateFolder);
 indexRouter.get("/folders/:id", indexController.getFolderDetails);
 indexRouter.post("/folders/:id/update", indexController.postUpdateFolder);
 indexRouter.post("/folders/:id/delete", indexController.postDeleteFolder);
+
 indexRouter.post(
   "/folders/:id/upload",
   upload.single("uploadedFile"),
   indexController.postUploadFileForm,
 );
-
 indexRouter.post(
   "/upload",
   upload.single("uploadedFile"),
   indexController.postUploadFileForm,
 );
+indexRouter.post("/files/:id/delete", indexController.postDeleteFile);
+indexRouter.get("/files/:id/download", indexController.downloadFile);
 
 module.exports = indexRouter;
