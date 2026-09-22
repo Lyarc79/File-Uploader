@@ -4,6 +4,17 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const supabase = require("../lib/supabase");
 
+const allowedMimeTypes = [
+  "text/plain",
+  "text/csv",
+  "application/msword",
+  "application/pdf",
+  "application/vnd.ms-excel",
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+];
+
 // Helper funcs
 async function renderIndexInfo(req, res, errors = null) {
   const folders = await db.getFolders(req.user.id);
@@ -15,6 +26,21 @@ async function renderIndexInfo(req, res, errors = null) {
     errors: errors,
     uploadAction: "/upload",
   });
+}
+
+async function validateFile(file) {
+  if (!file) {
+    return "No file uploaded or field name mismatch.";
+  }
+  const { size, mimetype } = req.file;
+  const fileSizeInMB = size / 1024 / 1024;
+  if (fileSizeInMB > 10) {
+    return "The maximum file size allowed is 10MB.";
+  }
+  if (!allowedMimeTypes.includes(mimetype)) {
+    return "That file format is not allowed.";
+  }
+  return null;
 }
 
 // Normal handlers
@@ -58,9 +84,11 @@ async function logoutUser(req, res, next) {
 }
 
 async function postUploadFileForm(req, res) {
-  if (!req.file) {
-    return res.status(400).send("No file uploaded or field name missmatch.");
+  const validationError = validateFile(req.file);
+  if (validationError) {
+    return res.status(400).send(validationError);
   }
+
   const folderId = req.params.id ? parseInt(req.params.id) : null;
   const { originalname, buffer, size, mimetype } = req.file;
   const filePath = folderId ? `${folderId}/${originalname}` : originalname;
