@@ -32,7 +32,7 @@ async function validateFile(file) {
   if (!file) {
     return "No file uploaded or field name mismatch.";
   }
-  const { size, mimetype } = req.file;
+  const { size, mimetype } = file;
   const fileSizeInMB = size / 1024 / 1024;
   if (fileSizeInMB > 10) {
     return "The maximum file size allowed is 10MB.";
@@ -84,7 +84,7 @@ async function logoutUser(req, res, next) {
 }
 
 async function postUploadFileForm(req, res) {
-  const validationError = validateFile(req.file);
+  const validationError = await validateFile(req.file);
   if (validationError) {
     return res.status(400).send(validationError);
   }
