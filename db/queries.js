@@ -96,6 +96,34 @@ async function getFileById(id) {
   });
 }
 
+// Dup names helper
+async function evaluateDupFiles(fileName, userId, folderId) {
+  const splitedName = fileName.split(".");
+  let match = await prisma.file.findFirst({
+    where: {
+      userId: userId,
+      folderId: folderId || null,
+      name: fileName,
+    },
+  });
+  let counter = 1;
+  let finalName = fileName;
+  while (match) {
+    const dupFile = `${splitedName[0]}(${counter}).${splitedName[1]}`;
+    const newMatch = await prisma.file.findFirst({
+      where: {
+        userId: userId,
+        folderId: folderId || null,
+        name: dupFile,
+      },
+    });
+    finalName = dupFile;
+    match = newMatch;
+    counter++;
+  }
+  return finalName;
+}
+
 module.exports = {
   getUserByIdentifier,
   getUserById,
@@ -109,4 +137,5 @@ module.exports = {
   getRootFiles,
   deleteFile,
   getFileById,
+  evaluateDupFiles,
 };
