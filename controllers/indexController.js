@@ -91,7 +91,12 @@ async function postUploadFileForm(req, res) {
 
   const folderId = req.params.id ? parseInt(req.params.id) : null;
   const { originalname, buffer, size, mimetype } = req.file;
-  const filePath = folderId ? `${folderId}/${originalname}` : originalname;
+  const uniqueFilename = await db.evaluateDupFiles(
+    originalname,
+    req.user.id,
+    folderId,
+  );
+  const filePath = folderId ? `${folderId}/${uniqueFilename}` : uniqueFilename;
 
   const { data, error } = await supabase.storage
     .from("uploads")
@@ -101,7 +106,7 @@ async function postUploadFileForm(req, res) {
     console.error("Supabase upload error:", error);
     return res.status(500).send("File upload failed.");
   } else {
-    await db.uploadFile(filePath, originalname, size, folderId, req.user.id);
+    await db.uploadFile(filePath, uniqueFilename, size, folderId, req.user.id);
   }
   if (folderId) {
     return res.redirect(`/folders/${folderId}`);
