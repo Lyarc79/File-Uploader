@@ -1,27 +1,37 @@
-<sidebar>
+<aside>
      <button onclick="openUploadFileDialog()">Upload file</button>
+     
         <dialog id="uploadFileDialog">
             <form action="<%= uploadAction %>" method="POST" enctype="multipart/form-data">
-                <input type="file" name="uploadedFile">
+              <h3>New File</h3>
+              <input type="file" name="uploadedFile">
+              <div class="modal-actions">
                 <button type="button" onclick="closeUploadFileDialog()">Close</button>
                 <button type="submit">Upload File</button>
+              </div>
             </form>
         </dialog>
 
         <button onclick="openNewFolderDialog()">New Folder</button>
         <dialog id="newFolderDialog">
           <form id="newFolderForm" action="/folders" method="POST">
+            <h3>New Folder</h3>
             <input type="text" name="name" id="newFolderInput" required>
-            <button type="button" onclick="closeNewFolderDialog()">Cancel</button>
-            <button type="submit">Create Folder</button>
+            <div class="modal-actions">
+              <button type="button" onclick="closeNewFolderDialog()">Cancel</button>
+              <button type="submit">Create Folder</button>
+            </div>
           </form>
         </dialog>
 
         <dialog id="editFolderDialog">
           <form id="editFolderForm" method="POST">
+            <h3>Edit Name</h3>
             <input type="text" name="name" id="editFolderInput" required>
-            <button type="button" onclick="closeEditFolderDialog()">Cancel</button>
-            <button type="submit">Update</button>
+            <div class="modal-actions">
+              <button type="button" onclick="closeEditFolderDialog()">Cancel</button>
+              <button type="submit">Update</button>
+            </div>
           </form>
         </dialog>
         <ul>
@@ -35,5 +45,5 @@
             </li>
          <% }); %>
         </ul>
-</sidebar>
+</aside>
  <script src="/js/folderDialogs.js" defer></script>
