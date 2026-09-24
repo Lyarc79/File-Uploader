@@ -1,0 +1,259 @@
+/* =========================================
+    GLOBAL
+   ========================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+.app-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* =========================================
+    HEADER
+   ========================================= */
+
+header {
+  height: 60px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e1e4e8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.home-btn {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.header-right-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.header-link {
+  color: #555;
+  font-size: 0.95rem;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.header-link:hover {
+  color: #007bff;
+  background-color: #f1f3f5;
+}
+
+.signup-btn {
+  background-color: #007bff;
+  color: white !important;
+}
+
+.signup-btn:hover {
+  background-color: #0056b3;
+}
+
+/* =========================================
+    SIDEBAR
+   ========================================= */
+
+aside {
+  width: 280px;
+  background-color: #ffffff;
+  border-right: 1px solid #e1e4e8;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+aside > button {
+  width: calc(100% - 20px);
+  margin: 0 auto 10px auto;
+  padding: 10px 16px;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #2d3748;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+aside > button:hover {
+  background-color: #edf2f7;
+  border-color: #a0aec0;
+}
+
+aside ul {
+  list-style: none;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.folder-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.folder-item:hover {
+  background-color: #f7fafc;
+}
+
+.folder-item a {
+  color: #4a5568;
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.folder-item a:hover {
+  color: #2b6cb0;
+}
+
+.folder-item button {
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #718096;
+}
+
+.folder-item button:hover {
+  background-color: #edf2f7;
+  color: #2d3748;
+}
+
+.folder-item form {
+  display: inline;
+}
+
+dialog {
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  margin: auto;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+dialog h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 10px;
+}
+
+dialog input[type="text"],
+dialog input[type="file"] {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+dialog input[type="file"]::file-selector-button {
+  padding: 6px 12px;
+  margin-right: 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #2d3748;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+dialog input[type="file"]::file-selector-button:hover {
+  background-color: #edf2f7;
+}
+
+dialog button {
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #cbd5e0;
+  background-color: #ffffff;
+  color: #4a5568;
+  transition: background-color 0.2s;
+}
+
+dialog button:hover {
+  background-color: #edf2f7;
+}
+
+dialog button[type="submit"] {
+  background-color: #007bff;
+  color: #ffffff;
+  border-color: #007bff;
+}
+
+dialog button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* =========================================
+    MAIN
+   ========================================= */
