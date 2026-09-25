@@ -7,12 +7,18 @@ const supabase = require("../lib/supabase");
 const allowedMimeTypes = [
   "text/plain",
   "text/csv",
+  "application/json",
   "application/msword",
   "application/pdf",
   "application/vnd.ms-excel",
   "image/jpeg",
   "image/png",
   "image/webp",
+  "image/gif",
+  "application/zip",
+  "application/x-zip-compressed",
+  "application/vnd.rar",
+  "application/x-rar-compressed",
 ];
 
 // Helper funcs
