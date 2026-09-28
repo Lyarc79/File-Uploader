@@ -20,7 +20,7 @@ body {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
-  background-color: #f4f6f9;
+  background-color: #f3f2fa;
   color: #333;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@ a {
 header {
   height: 60px;
   background-color: #ffffff;
-  border-bottom: 1px solid #e1e4e8;
+  border-bottom: 1px solid #c6c5d1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,7 +55,7 @@ header {
 .home-btn {
   font-size: 1.25rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #362b92;
 }
 
 .header-right-links {
@@ -73,17 +73,17 @@ header {
 }
 
 .header-link:hover {
-  color: #007bff;
+  color: #5f4eff;
   background-color: #f1f3f5;
 }
 
 .signup-btn {
-  background-color: #007bff;
+  background-color: #5f4eff;
   color: white !important;
 }
 
 .signup-btn:hover {
-  background-color: #0056b3;
+  background-color: #362b92;
 }
 
 /* =========================================
@@ -93,7 +93,7 @@ header {
 aside {
   width: 280px;
   background-color: #ffffff;
-  border-right: 1px solid #e1e4e8;
+  border-right: 1px solid #c6c5d1;
   display: flex;
   flex-direction: column;
   padding: 20px 0;
@@ -106,19 +106,20 @@ aside > button {
   margin: 0 auto 10px auto;
   padding: 10px 16px;
   background-color: #ffffff;
-  border: 1px solid #cbd5e0;
+  border: 1px solid #d0cfdf;
   border-radius: 6px;
   font-size: 0.95rem;
   font-weight: 500;
-  color: #2d3748;
+  color: #27253a;
   cursor: pointer;
   text-align: left;
   transition: all 0.2s;
 }
 
 aside > button:hover {
-  background-color: #edf2f7;
-  border-color: #a0aec0;
+  background-color: #362b92;
+  color: white;
+  border-color: #a09dbd;
 }
 
 aside ul {
@@ -139,17 +140,17 @@ aside ul {
 }
 
 .folder-item:hover {
-  background-color: #f7fafc;
+  background-color: #f3f2fd;
 }
 
 .folder-item a {
-  color: #4a5568;
+  color: #504a68;
   font-size: 0.95rem;
   flex: 1;
 }
 
 .folder-item a:hover {
-  color: #2b6cb0;
+  color: #3326aa;
 }
 
 .folder-item button {
@@ -159,12 +160,12 @@ aside ul {
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 4px;
-  color: #718096;
+  color: #55536e;
 }
 
 .folder-item button:hover {
-  background-color: #edf2f7;
-  color: #2d3748;
+  background-color: #e0def7;
+  color: #27253a;
 }
 
 .folder-item form {
@@ -201,14 +202,14 @@ dialog form {
 dialog h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #2d3748;
+  color: #3326aa;
   margin-bottom: 10px;
 }
 
 dialog input[type="text"],
 dialog input[type="file"] {
   padding: 8px 12px;
-  border: 1px solid #cbd5e0;
+  border: 1px solid #d0cfdf;
   border-radius: 4px;
   font-size: 0.95rem;
 }
@@ -216,17 +217,17 @@ dialog input[type="file"] {
 dialog input[type="file"]::file-selector-button {
   padding: 6px 12px;
   margin-right: 12px;
-  border: 1px solid #cbd5e0;
+  border: 1px solid #d0cfdf;
   border-radius: 4px;
   background-color: #ffffff;
-  color: #2d3748;
+  color: #27253a;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 dialog input[type="file"]::file-selector-button:hover {
-  background-color: #edf2f7;
+  background-color: #f3f2fd;
 }
 
 dialog button {
@@ -235,24 +236,24 @@ dialog button {
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  border: 1px solid #cbd5e0;
+  border: 1px solid #d0cfdf;
   background-color: #ffffff;
-  color: #4a5568;
+  color: #3326aa;
   transition: background-color 0.2s;
 }
 
 dialog button:hover {
-  background-color: #edf2f7;
+  background-color: #f3f2fd;
 }
 
 dialog button[type="submit"] {
-  background-color: #007bff;
+  background-color: #5f4eff;
   color: #ffffff;
-  border-color: #007bff;
+  border-color: #5f4eff;
 }
 
 dialog button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #362b92;
 }
 
 /* =========================================
@@ -268,7 +269,7 @@ dialog button[type="submit"]:hover {
 }
 
 .dashboard-title strong {
-  color: #007bff;
+  color: #5f4eff;
 }
 
 .file-list {
@@ -293,17 +294,24 @@ dialog button[type="submit"]:hover {
   display: flex;
   align-items: center;
   background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #d0cfdf;
   border-radius: 8px;
   padding: 14px 16px;
-  color: #2d3748;
+  color: #27253a;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
   transition: all 0.2s ease;
 }
 
 .file-row:hover {
-  border-color: #cbd5e0;
+  border-color: #a09dbd;
+  background-color: #362b92;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+.file-row:hover,
+.file-row:hover span,
+.file-row:hover a {
+  color: white;
 }
 
 .col-name {
@@ -311,12 +319,13 @@ dialog button[type="submit"]:hover {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: #3326aa;
 }
 
 .col-size,
 .col-date {
   flex: 1;
-  color: #718096;
+  color: #3326aa;
   font-size: 0.9rem;
 }
 
@@ -329,7 +338,7 @@ dialog button[type="submit"]:hover {
 }
 
 .btn-action {
-  color: #007bff;
+  color: #5f4eff;
   font-size: 0.9rem;
 }
 
