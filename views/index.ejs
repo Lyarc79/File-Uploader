@@ -11,10 +11,7 @@
     <div class="app-container">
       <%- include("partials/sidebar") %>
       <main class="main-container">
-        <h1>Welcome to your Dashboard</h1>
-        <% if(user) { %>
-          <p>Logged in as: <strong><%= user.username %></strong></p>
-        <% } %>
+        <h1 class="dashboard-title">Welcome <strong><%= user.username %></strong></h1>
         <div class="file-list">
           <div class="file-list-header">
             <span class="col-name">Name</span>
@@ -28,7 +25,7 @@
                 <span class="file-icon"><%= getFileIcon(file.name) %></span>
                 <span><%= file.name %></span>
               </div>
-              <span class="col-size"><%= file.size %></span>
+              <span class="col-size"><%= formatFileSize(file.size) %></span>
               <span class="col-date"><%= new Date(file.createdAt).toLocaleDateString() %></span>
               <div class="col-actions">
                 <a href="/files/<%= file.id %>/download" class="btn-action">Download</a>

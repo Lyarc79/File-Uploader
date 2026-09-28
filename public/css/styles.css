@@ -267,6 +267,10 @@ dialog button[type="submit"]:hover {
   background-color: transparent;
 }
 
+.dashboard-title strong {
+  color: #007bff;
+}
+
 .file-list {
   display: flex;
   flex-direction: column;
@@ -325,7 +329,7 @@ dialog button[type="submit"]:hover {
 }
 
 .btn-action {
-  color: #3182ce;
+  color: #007bff;
   font-size: 0.9rem;
 }
 
