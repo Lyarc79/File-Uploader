@@ -1,5 +1,5 @@
 <aside>
-     <button onclick="openUploadFileDialog()">Upload file</button>
+     <button onclick="openUploadFileDialog()"><i class="fa-solid fa-file-arrow-up fa-lg"></i>Upload file</button>
      
         <dialog id="uploadFileDialog">
             <form action="<%= uploadAction %>" method="POST" enctype="multipart/form-data">
@@ -12,7 +12,7 @@
             </form>
         </dialog>
 
-        <button onclick="openNewFolderDialog()">New Folder</button>
+        <button onclick="openNewFolderDialog()"><i class="fa-solid fa-folder-plus fa-lg"></i>New Folder</button>
         <dialog id="newFolderDialog">
           <form id="newFolderForm" action="/folders" method="POST">
             <h3>New Folder</h3>
@@ -38,9 +38,9 @@
           <% folders.forEach(folder => { %>
             <li class="folder-item">
               <a href="/folders/<%= folder.id %>"><span><%= folder.name %></span></a>
-              <button type="button" onclick="openEditFolderDialog('<%= folder.id %>', '<%= folder.name %>')">Edit</button>
+              <button type="button" onclick="openEditFolderDialog('<%= folder.id %>', '<%= folder.name %>')"><i class="fa-solid fa-pen-to-square"></i></button>
               <form action="/folders/<%= folder.id %>/delete" method="POST">
-                <button type="submit">Delete</button>
+                <button type="submit"><i class="fa-solid fa-trash"></i></button>
               </form>
             </li>
          <% }); %>

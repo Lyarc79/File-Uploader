@@ -70,11 +70,24 @@ header {
   padding: 6px 12px;
   border-radius: 4px;
   transition: all 0.2s;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  line-height: 1;
 }
 
 .header-link:hover {
   color: #5f4eff;
   background-color: #f1f3f5;
+}
+
+.login-btn,
+.signup-btn {
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .signup-btn {
@@ -102,6 +115,9 @@ aside {
 }
 
 aside > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   width: calc(100% - 20px);
   margin: 0 auto 10px auto;
   padding: 10px 16px;
@@ -120,6 +136,14 @@ aside > button:hover {
   background-color: #362b92;
   color: white;
   border-color: #a09dbd;
+}
+
+aside > button i {
+  color: #362b92;
+}
+
+aside > button:hover i {
+  color: white;
 }
 
 aside ul {
@@ -175,7 +199,7 @@ aside ul {
 dialog {
   padding: 20px;
   border-radius: 8px;
-  border: 1px solid #cbd5e0;
+  border: 1px solid #a09dbd;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   width: 100%;
@@ -284,7 +308,7 @@ dialog button[type="submit"]:hover {
   display: flex;
   padding: 0 16px 8px 16px;
   font-size: 0.85rem;
-  color: #a0aec0;
+  color: #a09dbd;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -318,7 +342,7 @@ dialog button[type="submit"]:hover {
   flex: 2.5;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   color: #3326aa;
 }
 
@@ -340,13 +364,10 @@ dialog button[type="submit"]:hover {
 .btn-action {
   color: #5f4eff;
   font-size: 0.9rem;
+  transition: transform 0.2s ease;
 }
 
-.btn-action:hover {
-  text-decoration: underline;
-}
-
-.btn-danger {
+.btn-delete {
   background: none;
   border: none;
   color: #e53e3e;
@@ -354,8 +375,14 @@ dialog button[type="submit"]:hover {
   font-weight: 500;
   cursor: pointer;
   padding: 0;
+  transition: transform 0.2s ease;
 }
 
-.btn-danger:hover {
-  text-decoration: underline;
+.btn-action:hover,
+.btn-delete:hover {
+  transform: scale(1.2);
 }
+
+/* =========================================
+    SIGN-UP
+   ========================================= */
