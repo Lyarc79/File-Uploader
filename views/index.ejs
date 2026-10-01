@@ -13,6 +13,7 @@
       <%- include("partials/sidebar") %>
       <main class="main-container">
         <h1 class="dashboard-title">Welcome <strong><%= user.username %></strong></h1>
+        <% if(files && files.length > 0) { %>
         <div class="file-list">
           <div class="file-list-header">
             <span class="col-name">Name</span>
@@ -37,6 +38,15 @@
             </div>
           <% }) %>
         </div>
+        <% } else { %>
+          <div class="empty-state-container">
+            <div class="empty-state">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <h3>No files uploaded yet</h3>
+              <p>Get started by uploading your first file or creating a folder</p>
+            </div>
+          </div>
+        <% } %>
       </main>
     </div>
   </body>

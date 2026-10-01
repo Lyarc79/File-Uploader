@@ -53,9 +53,16 @@ header {
 }
 
 .home-btn {
+  display: inline-block;
   font-size: 1.25rem;
   font-weight: bold;
   color: #362b92;
+  transition: all 0.2s ease-in-out;
+}
+
+.home-btn:hover {
+  color: #5f4eff;
+  opacity: 0.85;
 }
 
 .header-right-links {
@@ -381,6 +388,47 @@ dialog button[type="submit"]:hover {
 .btn-action:hover,
 .btn-delete:hover {
   transform: scale(1.2);
+}
+
+/* =========================================
+    EMPTY STATE
+   ========================================= */
+
+.empty-state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  min-height: 60vh;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: #55536e;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: #a09dbd;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #27253a;
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 1.2rem;
+  margin: 0;
 }
 
 /* =========================================

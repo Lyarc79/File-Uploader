@@ -13,6 +13,7 @@
       <%- include("partials/sidebar") %>
       <main class="main-container">
           <h1 class="dashboard-title"><strong><%= folder.name %></strong></h1>
+          <% if(folder.files && folder.files.length > 0) { %>
           <div class="file-list">
           <div class="file-list-header">
             <span class="col-name">Name</span>
@@ -29,13 +30,23 @@
               <span class="col-size"><%= formatFileSize(file.size) %></span>
               <span class="col-date"><%= new Date(file.createdAt).toLocaleDateString() %></span>
               <div class="col-actions">
-                <a href="/files/<%= file.id %>/download" class="btn-action">Download</a>
+                <a href="/files/<%= file.id %>/download" class="btn-action"><i class="fa-solid fa-download fa-lg"></i></a>
                 <form action="/files/<%= file.id %>/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this file?');">
-                  <button type="submit" class="btn-danger">Delete</button>
+                  <button type="submit" class="btn-delete"><i class="fa-solid fa-trash fa-lg"></i></button>
                 </form>
               </div>
             </div>
           <% }) %>
+        </div>
+        <% } else { %>
+          <div class="empty-state-container">
+            <div class="empty-state">
+              <i class="fa-solid fa-folder-open"></i>
+              <h3>This folder is empty</h3>
+              <p>Upload some files to get started!</p>
+            </div>
+          </div>
+        <% } %>
       </main>
     </div>
   </body>
