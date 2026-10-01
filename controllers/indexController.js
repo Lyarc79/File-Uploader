@@ -147,6 +147,7 @@ async function getFolderDetails(req, res) {
     folders,
     uploadAction: `/folders/${folder.id}/upload`,
     currentFolderId: folder.id,
+    user: req.user,
   });
 }
 
