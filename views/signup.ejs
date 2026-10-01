@@ -9,45 +9,47 @@
   <body>
     <%- include("partials/header") %>
     <main class="main-container">
-      <form action="/signup" method="POST">
-        <h3>Sign up</h3>
-        <%- include("partials/validationErrors") %>
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value="<%= formData.username %>"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value="<%= formData.email %>"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password" required />
-        </div>
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            required
-          />
-        </div>
-        <button type="submit">Sign up</button>
-        <p>Already have an account?<a href="/login">Log in</a></p>
-      </form>
+      <div class="auth-container">
+        <form action="/signup" method="POST" class="signup-form">
+          <h3>Sign up</h3>
+          <%- include("partials/validationErrors") %>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              value="<%= formData.username %>"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value="<%= formData.email %>"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required />
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              required
+            />
+          </div>
+          <button type="submit">Sign up</button>
+          <p>Already have an account?<a href="/login"> Log in</a></p>
+        </form>
+      </div>
     </main>
   </body>
 </html>

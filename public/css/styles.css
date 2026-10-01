@@ -435,5 +435,119 @@ dialog button[type="submit"]:hover {
 }
 
 /* =========================================
-    SIGN-UP
+    LOGIN & SIGNUP FORMS
    ========================================= */
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 100px;
+  padding: 20px;
+}
+
+.login-form,
+.signup-form {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.login-form h3,
+.signup-form h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #362b92;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #55536e;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #a09dbd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input:focus {
+  border-color: #5f4eff;
+  box-shadow: 0 0 0 3px rgba(79, 79, 229, 0.15);
+}
+
+.login-form button[type="submit"],
+.signup-form button[type="submit"] {
+  width: 100%;
+  padding: 10px 16px;
+  background-color: #5f4eff;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.login-form button[type="submit"]:hover,
+.signup-form button[type="submit"]:hover {
+  background-color: #362b92;
+}
+
+.login-form p,
+.signup-form p {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #55536e;
+  margin-top: 20px;
+}
+
+.login-form p a,
+.signup-form p a {
+  color: #5f4eff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-form p a:hover,
+.signup-form p a:hover {
+  text-decoration: underline;
+}
+
+.error-message,
+.error-box {
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.error-box ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
