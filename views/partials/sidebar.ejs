@@ -36,7 +36,7 @@
         </dialog>
         <ul>
           <% folders.forEach(folder => { %>
-            <li class="folder-item">
+            <li class="folder-item <%= (typeof currentFolderId !== 'undefined' && currentFolderId.toString() === folder.id.toString()) ? 'active' : '' %>">
               <a href="/folders/<%= folder.id %>"><span><%= folder.name %></span></a>
               <button type="button" onclick="openEditFolderDialog('<%= folder.id %>', '<%= folder.name %>')"><i class="fa-solid fa-pen-to-square"></i></button>
               <form action="/folders/<%= folder.id %>/delete" method="POST">

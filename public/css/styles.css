@@ -162,6 +162,7 @@ aside ul {
 }
 
 .folder-item {
+  margin-left: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -170,7 +171,8 @@ aside ul {
   transition: background-color 0.2s;
 }
 
-.folder-item:hover {
+.folder-item:hover,
+.folder-item.active {
   background-color: #f3f2fd;
 }
 
@@ -180,7 +182,8 @@ aside ul {
   flex: 1;
 }
 
-.folder-item a:hover {
+.folder-item a:hover,
+.folder-item.active a {
   color: #3326aa;
 }
 
