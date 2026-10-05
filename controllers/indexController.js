@@ -71,6 +71,24 @@ async function postSignupForm(req, res) {
     });
   }
   const { username, email, password, confirmPassword } = req.body;
+
+  const existingUsername = await db.getUserByIdentifier(username);
+  const existingEmail = await db.getUserByIdentifier(email);
+
+  if (existingUsername) {
+    return res.render("signup", {
+      errors: [{ msg: "That username is already taken." }],
+      formData: req.body,
+    });
+  }
+
+  if (existingEmail) {
+    return res.render("signup", {
+      errors: [{ msg: "That email is already registered." }],
+      formData: req.body,
+    });
+  }
+
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   await db.createUser(username, email, hashedPassword);
   res.redirect("/login");
