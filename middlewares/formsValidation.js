@@ -24,6 +24,16 @@ const validateSignup = [
     .withMessage("Passwords don't match."),
 ];
 
+const validateFolder = [
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage("Folder name can't be empty.")
+    .isLength({ max: 20 })
+    .withMessage("Folder name can't be higher than 20 characters."),
+];
+
 module.exports = {
   validateSignup,
+  validateFolder,
 };

@@ -13,9 +13,10 @@
         </dialog>
 
         <button onclick="openNewFolderDialog()"><i class="fa-solid fa-folder-plus fa-lg"></i>New Folder</button>
-        <dialog id="newFolderDialog">
+        <dialog id="newFolderDialog" data-open-on-error="<%= typeof openFolderModal !== 'undefined' && openFolderModal ? 'true' : 'false' %>">
           <form id="newFolderForm" action="/folders" method="POST">
             <h3>New Folder</h3>
+            <%- include('./validationErrors') %>
             <input type="text" name="name" id="newFolderInput" required>
             <div class="modal-actions">
               <button type="button" onclick="closeNewFolderDialog()">Cancel</button>

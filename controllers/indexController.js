@@ -22,7 +22,7 @@ const allowedMimeTypes = [
 ];
 
 // Helper funcs
-async function renderIndexInfo(req, res, errors = null) {
+async function renderIndexInfo(req, res, errors = null, options = {}) {
   const folders = await db.getFolders(req.user.id);
   const files = await db.getRootFiles(req.user.id);
   return res.render("index", {
@@ -31,6 +31,7 @@ async function renderIndexInfo(req, res, errors = null) {
     files,
     errors: errors,
     uploadAction: "/upload",
+    ...options,
   });
 }
 
@@ -141,7 +142,7 @@ async function postUploadFileForm(req, res) {
 async function postCreateFolder(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return renderIndexInfo(req, res, errors.array());
+    return renderIndexInfo(req, res, errors.array(), { openFolderModal: true });
   }
   await db.createFolder(req.body.name, req.user.id);
   res.redirect("/");

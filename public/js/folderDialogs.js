@@ -1,8 +1,20 @@
-const uploadFiledialog = document.getElementById("uploadFileDialog");
-const editFolderDialog = document.getElementById("editFolderDialog");
-const editFolderForm = document.getElementById("editFolderForm");
-const editFolderInput = document.getElementById("editFolderInput");
-const newFolderDialog = document.getElementById("newFolderDialog");
+let uploadFiledialog;
+let editFolderDialog;
+let editFolderForm;
+let editFolderInput;
+let newFolderDialog;
+
+document.addEventListener("DOMContentLoaded", () => {
+  uploadFiledialog = document.getElementById("uploadFileDialog");
+  editFolderDialog = document.getElementById("editFolderDialog");
+  editFolderForm = document.getElementById("editFolderForm");
+  editFolderInput = document.getElementById("editFolderInput");
+  newFolderDialog = document.getElementById("newFolderDialog");
+  if (newFolderDialog && newFolderDialog.dataset.openOnError === "true") {
+    openNewFolderDialog();
+    window.history.replaceState({}, document.title, "/");
+  }
+});
 
 function openUploadFileDialog() {
   uploadFiledialog.showModal();
@@ -16,6 +28,7 @@ function openNewFolderDialog() {
 }
 function closeNewFolderDialog() {
   newFolderDialog.close();
+  newFolderDialog.removeAttribute("data-open-on-error");
 }
 
 function openEditFolderDialog(folderId, folderName) {
