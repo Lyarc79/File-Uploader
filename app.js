@@ -39,6 +39,27 @@ app.use("/", indexRouter);
 app.locals.getFileIcon = getFileIcon;
 app.locals.formatFileSize = formatFileSize;
 
+app.use((req, res, next) => {
+  const err = new Error("Page Not Found");
+  err.status = 404;
+  next(err);
+});
+app.use((err, req, res, next) => {
+  console.log("Faillling URL:", req.originalUrl);
+  if (err.status !== 404) {
+    console.error("Server Error:", err.stack);
+  }
+
+  const status = err.status || err.statusCode || 500;
+  res.status(status).render("errors", {
+    status: status,
+    message:
+      status === 500
+        ? "A server error ocurred. Please try again later"
+        : err.message || "An unexpected error ocurred",
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`);

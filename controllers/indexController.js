@@ -108,7 +108,7 @@ async function logoutUser(req, res, next) {
   });
 }
 
-async function postUploadFileForm(req, res) {
+async function postUploadFileForm(req, res, next) {
   const validationError = await validateFile(req.file);
   if (validationError) {
     return res.status(400).send(validationError);
@@ -128,8 +128,9 @@ async function postUploadFileForm(req, res) {
     .upload(filePath, buffer, { contentType: mimetype, upsert: true });
 
   if (error) {
-    console.error("Supabase upload error:", error);
-    return res.status(500).send("File upload failed.");
+    const err = new Error("File upload failed.");
+    err.status = 500;
+    return next(err);
   } else {
     await db.uploadFile(filePath, uniqueFilename, size, folderId, req.user.id);
   }
@@ -178,14 +179,15 @@ async function postDeleteFile(req, res) {
   res.redirect("/");
 }
 
-async function downloadFile(req, res) {
+async function downloadFile(req, res, next) {
   const file = await db.getFileById(req.params.id);
   const { data, error } = await supabase.storage
     .from("uploads")
     .download(file.path);
   if (error) {
-    console.error("Supabase download error:", error);
-    return res.status(500).send("File download failed.");
+    const err = new Error("File downoad failed.");
+    err.status = 500;
+    return next(err);
   }
   const buffer = Buffer.from(await data.arrayBuffer());
   res.setHeader("Content-Disposition", `attachment; filename="${file.name}`);
