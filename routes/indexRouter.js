@@ -28,6 +28,8 @@ indexRouter.post("/folders", validateFolder, indexController.postCreateFolder);
 indexRouter.get("/folders/:id", indexController.getFolderDetails);
 indexRouter.post("/folders/:id/update", indexController.postUpdateFolder);
 indexRouter.post("/folders/:id/delete", indexController.postDeleteFolder);
+indexRouter.post("/folders/:id/share", indexController.shareFolder);
+indexRouter.get("/share/:token", indexController.getSharedFolder);
 
 indexRouter.post(
   "/folders/:id/upload",
