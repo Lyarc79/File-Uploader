@@ -29,11 +29,12 @@ model Session {
 }
 
 model Folder {
-  id     Int    @id @default(autoincrement())
-  name   String
-  user   User   @relation(fields: [userId], references: [id])
-  userId Int
-  files  File[]
+  id          Int          @id @default(autoincrement())
+  name        String
+  user        User         @relation(fields: [userId], references: [id])
+  userId      Int
+  files       File[]
+  sharedLinks SharedLink[]
 }
 
 model File {
@@ -46,4 +47,13 @@ model File {
   folderId  Int?
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
+}
+
+model SharedLink {
+  id        String   @id @default(uuid())
+  token     String   @unique @default(uuid())
+  folderId  Int
+  folder    Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }
