@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Uploader</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://kit.fontawesome.com/967516047d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <%- include("partials/header") %>
+    <main class="main-container">
+        <h1 class="dashboard-title">Shared Folder: <strong><%= folder.name %></strong></h1>
+          <% if(folder.files && folder.files.length > 0) { %>
+          <div class="file-list">
+          <div class="file-list-header">
+            <span class="col-name">Name</span>
+            <span class="col-size">Size</span>
+            <span class="col-date">Created</span>
+            <span class="col-actions"></span>
+          </div>
+          <% folder.files.forEach((file)=>{ %>
+             <div class="file-row">
+              <div class="col-name file-title">
+                <span class="file-icon"><%- getFileIcon(file.name) %></span>
+                <span><%= file.name %></span>
+              </div>
+              <span class="col-size"><%= formatFileSize(file.size) %></span>
+              <span class="col-date"><%= new Date(file.createdAt).toLocaleDateString() %></span>
+              <div class="col-actions">
+                <a href="/files/<%= file.id %>/download" class="btn-action"><i class="fa-solid fa-download fa-lg"></i></a>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+        <% } else { %>
+          <div class="empty-state-container">
+            <div class="empty-state">
+              <i class="fa-solid fa-folder-open"></i>
+              <h3>This folder is empty</h3>
+              <p>There are no files in this shared folder!</p>
+            </div>
+          </div>
+        <% } %>
+    </main>
+</body>
+</html>

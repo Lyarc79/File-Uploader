@@ -35,11 +35,29 @@
             </div>
           </form>
         </dialog>
+
+        <dialog id="shareFolderDialog">
+          <form id="shareFolderForm" method="POST">
+            <h3>Share Folder</h3>
+            <label for="duration">Link Expiration:</label>
+            <select name="duration" id="duration" required>
+              <option value="1d">1 Day</option>
+              <option value="7d">7 Days</option>
+              <option value="30d">30 Days</option>
+            </select>
+            <div class="modal-actions">
+              <button type="button" onclick="closeShareFolderDialog()">Cancel</button>
+              <button type="submit">Generate Link</button>
+            </div>
+          </form>
+        </dialog>
+        
         <ul>
           <% folders.forEach(folder => { %>
             <li class="folder-item <%= (typeof currentFolderId !== 'undefined' && currentFolderId.toString() === folder.id.toString()) ? 'active' : '' %>">
               <a href="/folders/<%= folder.id %>"><span><%= folder.name %></span></a>
               <button type="button" onclick="openEditFolderDialog('<%= folder.id %>', '<%= folder.name %>')"><i class="fa-solid fa-pen-to-square"></i></button>
+              <button type="button" onclick="openShareFolderDialog('<%= folder.id %>')"><i class="fa-solid fa-share"></i></button>
               <form action="/folders/<%= folder.id %>/delete" method="POST">
                 <button type="submit"><i class="fa-solid fa-trash"></i></button>
               </form>
