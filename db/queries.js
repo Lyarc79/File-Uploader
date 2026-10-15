@@ -124,6 +124,26 @@ async function evaluateDupFiles(fileName, userId, folderId) {
   return finalName;
 }
 
+async function createSharedLink(folderId, expiresAt) {
+  return await prisma.sharedLink.create({
+    data: {
+      folderId: Number(folderId),
+      expiresAt: expiresAt,
+    },
+  });
+}
+
+async function getSharedLink(token) {
+  return await prisma.sharedLink.findUnique({
+    where: { token },
+    include: {
+      folder: {
+        include: { files: true },
+      },
+    },
+  });
+}
+
 module.exports = {
   getUserByIdentifier,
   getUserById,
@@ -138,4 +158,6 @@ module.exports = {
   deleteFile,
   getFileById,
   evaluateDupFiles,
+  createSharedLink,
+  getSharedLink,
 };
