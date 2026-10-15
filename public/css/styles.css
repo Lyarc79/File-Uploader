@@ -290,6 +290,42 @@ dialog button[type="submit"]:hover {
   background-color: #362b92;
 }
 
+dialog form select {
+  padding: 8px 12px;
+  border: 1px solid #d0cfdf;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  color: #27253a;
+  width: 100%;
+}
+
+dialog label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #27253a;
+}
+
+dialog input:focus,
+dialog select:focus {
+  border-color: #5f4eff;
+  box-shadow: 0 0 0 3px rgba(79, 79, 229, 0.15);
+  outline: none;
+}
+
+/* Not working for now */
+dialog select option {
+  background-color: #ffffff;
+  color: #27253a;
+  padding: 8px;
+}
+
+dialog select option:hover,
+dialog select option:focus {
+  background-color: #3326aa;
+  color: #ffffff;
+}
+
 /* =========================================
     MAIN
    ========================================= */

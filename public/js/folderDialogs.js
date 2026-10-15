@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   editFolderForm = document.getElementById("editFolderForm");
   editFolderInput = document.getElementById("editFolderInput");
   newFolderDialog = document.getElementById("newFolderDialog");
+  shareFolderDialog = document.getElementById("shareFolderDialog");
+  shareFolderForm = document.getElementById("shareFolderForm");
   if (newFolderDialog && newFolderDialog.dataset.openOnError === "true") {
     openNewFolderDialog();
     window.history.replaceState({}, document.title, "/");
@@ -38,4 +40,13 @@ function openEditFolderDialog(folderId, folderName) {
 }
 function closeEditFolderDialog() {
   editFolderDialog.close();
+}
+
+function openShareFolderDialog(folderId) {
+  shareFolderForm.action = `/folders/${folderId}/share`;
+  shareFolderDialog.showModal();
+}
+
+function closeShareFolderDialog() {
+  shareFolderDialog.close();
 }
