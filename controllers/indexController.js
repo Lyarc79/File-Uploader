@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const supabase = require("../lib/supabase");
+const { folder } = require("../lib/prisma");
 
 const allowedMimeTypes = [
   "text/plain",
@@ -194,6 +195,48 @@ async function downloadFile(req, res, next) {
   res.send(buffer);
 }
 
+async function shareFolder(req, res) {
+  const folderId = req.params.id;
+  const { duration } = req.body;
+
+  const expiresAt = new Date();
+  switch (duration) {
+    case "1d":
+      expiresAt.setDate(expiresAt.getDate() + 1);
+      break;
+    case "7d":
+      expiresAt.setDate(expiresAt.getDate() + 7);
+      break;
+    case "30d":
+      expiresAt.setDate(expiresAt.getDate() + 30);
+      break;
+    default:
+      expiresAt.setDate(expiresAt.getDate() + 1);
+  }
+
+  const sharedLink = await db.createSharedLink(folderId, expiresAt);
+  const shareUrl = `${req.protocol}://${req.get("host")}/share/${sharedLink.token}`;
+  res.redirect(shareUrl);
+}
+
+async function getSharedFolder(req, res, next) {
+  const { token } = req.params;
+  const sharedLink = await db.getSharedLink(token);
+
+  if (!sharedLink) {
+    const err = new Error("Shared link not found.");
+    err.status = 404;
+    return next(err);
+  }
+  if (new Date() > sharedLink.expiresAt) {
+    const err = new Error("This shared link not has expired.");
+    err.status = 410;
+    return next(err);
+  }
+
+  res.render("sharedFolder", { folder: sharedLink.folder });
+}
+
 module.exports = {
   getLoginForm,
   getSignupForm,
@@ -207,4 +250,6 @@ module.exports = {
   getFolderDetails,
   postDeleteFile,
   downloadFile,
+  shareFolder,
+  getSharedFolder,
 };
