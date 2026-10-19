@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Lyarc79/File-Uploader#readme",
   "dependencies": {
+    "@prisma/adapter-pg": "^7.10.1",
     "@prisma/client": "^7.10.0",
     "@quixo3/prisma-session-store": "^3.1.21",
     "@supabase/supabase-js": "^2.116.0",
