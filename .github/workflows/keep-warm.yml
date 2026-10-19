@@ -1,0 +1,15 @@
+name: Keep Supabase & Render Active
+
+on:
+  schedule:
+    # Every 14mins
+    - cron: "*/14 * * * *"
+  workflow_dispatch:
+
+  jobs:
+    ping:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Ping App
+          run: |
+            curl -sS https://file-uploader-2lm3.onrender.com > /dev/null
