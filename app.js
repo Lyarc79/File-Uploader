@@ -45,7 +45,7 @@ app.use((req, res, next) => {
   next(err);
 });
 app.use((err, req, res, next) => {
-  console.log("Faillling URL:", req.originalUrl);
+  console.log("Failing URL:", req.originalUrl);
   if (err.status !== 404) {
     console.error("Server Error:", err.stack);
   }
